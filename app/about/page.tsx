@@ -30,13 +30,19 @@ export default function About() {
               <Logo />
               <div className="hidden md:block ml-10">
                 <div className="flex items-center space-x-8">
-                  <Link
-                    href="/"
-                    className="font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
-                  >
+                  <Link href="/" className="font-medium text-primary">
                     Home
                   </Link>
-                  <Link href="/about" className="font-medium text-primary">
+                  <Link
+                    href="/schedule"
+                    className="font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
+                  >
+                    Schedule
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
+                  >
                     About
                   </Link>
                 </div>
