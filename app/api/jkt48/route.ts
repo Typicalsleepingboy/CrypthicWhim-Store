@@ -5,15 +5,14 @@ export const revalidate = 3600
 
 export async function GET() {
     try {
-        const response = await fetch(
-            "https://www.idn.app/_next/data/ftOY5rYjw5jzzJImYGdhL/jkt48-official.json?username=jkt48-official",
-            {
-                next: { revalidate: 3600 },
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+        const apiUrl = `${process.env.NEXT_PUBLIC_IDN_API_BASE_URL}/${process.env.NEXT_PUBLIC_IDN_API_PATH}?username=${process.env.NEXT_PUBLIC_IDN_API_USERNAME}`
+        
+        const response = await fetch(apiUrl, {
+            next: { revalidate: 3600 },
+            headers: {
+                'Content-Type': 'application/json',
             }
-        )
+        })
 
         if (!response.ok) {
             throw new Error(`Failed to fetch data: ${response.status}`)
