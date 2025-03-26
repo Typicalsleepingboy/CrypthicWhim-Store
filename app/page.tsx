@@ -203,19 +203,6 @@ const navLinks = [
               </a>
             </div>
           </div>
-          <div
-            className={`flex justify-center z-10 ${isLoaded ? "animate-slide-in-right animate-delay-200" : "opacity-0"}`}
-          >
-            <div className="relative">
-              <Image
-                src="/cr1.png"
-                alt="Digital products showcase"
-                width={400}
-                height={300}
-                className="rounded-lg"
-              />
-            </div>
-          </div>
         </div>
 
         <div
