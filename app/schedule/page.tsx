@@ -128,9 +128,9 @@ export default function SchedulePage() {
                 </div>
             </nav>
 
-            <section className="text-white py-12 px-4">
+            <section className="py-12 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-4">Show Streaming JKT48</h1>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Show Streaming JKT48</h2>
                     <p className="text-lg opacity-90 max-w-2xl">
                         Daftar jadwal show yang akan tayang!
                     </p>
