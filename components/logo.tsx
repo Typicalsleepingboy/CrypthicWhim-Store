@@ -19,10 +19,10 @@ export default function Logo({ size = "md", withText = true, className = "" }: L
   return (
     <Link href="/" className={`flex items-center ${className}`}>
       <div
-        className={`w-${size === "sm" ? "6" : size === "md" ? "8" : "10"} h-${size === "sm" ? "6" : size === "md" ? "8" : "10"} bg-primary rounded-full flex items-center justify-center overflow-hidden`}
+        className={`w-${size === "sm" ? "6" : size === "md" ? "8" : "10"} h-${size === "sm" ? "6" : size === "md" ? "8" : "10"}  rounded-full flex items-center justify-center overflow-hidden`}
       >
         <Image
-          src="https://cdn.discordapp.com/attachments/1311639745738309643/1345986819602386954/Blue_Minimalist_Creative_Name_Logo.png?ex=67e43529&is=67e2e3a9&hm=654882ac641653d9087801ec489c69768928e6748ab1e5be0b3b2bf6144803ce&"
+          src="/cr1.png"
           alt="CrypthicWhim Logo"
           width={sizeValue}
           height={sizeValue}

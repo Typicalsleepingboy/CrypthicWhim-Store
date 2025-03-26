@@ -10,8 +10,9 @@ export const metadata: Metadata = {
   title: "CrypthicWhim Store",
   description:
     "Third-party platform for digital products including PM JKT48, YouTube Membership, Discord Nitro and more",
-    generator: 'v0.dev'
+  icons:"/cr1.ico"
 }
+
 
 export default function RootLayout({
   children,
