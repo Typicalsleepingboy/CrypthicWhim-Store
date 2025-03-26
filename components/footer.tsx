@@ -5,10 +5,7 @@ import DiscordBanner from "@/components/discord-banner"
 export default function Footer() {
   return (
     <footer className="w-full">
-      {/* Discord Banner */}
       <DiscordBanner />
-
-      {/* Main Footer */}
       <div className="bg-gray-900 text-gray-300 py-8">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between mb-8">
@@ -38,7 +35,7 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="hover:text-white transition-colors">
+                    <Link href="/schedule" className="hover:text-white transition-colors">
                       JKT48 Show
                     </Link>
                   </li>

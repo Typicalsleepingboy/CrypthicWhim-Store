@@ -51,24 +51,17 @@ export default function EventDetailPage() {
                     throw new Error("Failed to fetch events")
                 }
                 const data = await response.json()
-                console.log("API Response for detail page:", data) // Log the full response
-
-                // Try to find the event in livestreams first, then in paidRooms
                 let foundEvent = null
-
                 if (data.livestreams && Array.isArray(data.livestreams)) {
                     foundEvent = data.livestreams.find((e: TheaterEvent) => e.slug === slug)
                 }
-
                 if (!foundEvent && data.paidRooms && Array.isArray(data.paidRooms)) {
                     foundEvent = data.paidRooms.find((e: TheaterEvent) => e.slug === slug)
                 }
-
                 if (foundEvent) {
                     setEvent(foundEvent)
                 } else {
                     console.error(`Event with slug "${slug}" not found in API response`)
-                    // Event not found, redirect to schedule page after a short delay
                     setTimeout(() => router.push("/schedule"), 1000)
                 }
             } catch (error) {
@@ -154,15 +147,15 @@ export default function EventDetailPage() {
                     <div className="relative w-64 h-64 mb-8">
                         <Image
                             src="/notfound.png" 
-                            alt="Event not found"
+                            alt="Theater not found"
                             fill
                             className="object-contain"
                             priority
                         />
                     </div>
-                    <h1 className="text-2xl font-bold mb-4">Event Not Found</h1>
+                    <h1 className="text-2xl font-bold mb-4">Theater not found</h1>
                     <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
-                        The event you're looking for doesn't exist or has been removed.
+                        The theater you're looking for doesn't exist or has been removed.
                     </p>
                     <Button asChild>
                         <Link href="/schedule">Back to Schedule</Link>

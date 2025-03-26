@@ -36,10 +36,9 @@ export default function NotFound() {
       </nav>
 
       <div className="flex-1 flex flex-col items-center justify-center px-4 text-center">
-        {/* Not Found Illustration */}
-        <div className={`relative w-64 h-64 mb-8 ${isLoaded ? "animate-bounce animate-delay-100" : "opacity-0"}`}>
+        <div className={`relative w-64 h-64 mb-8 ${isLoaded ? "animate-fade-in animate-delay-300" : "opacity-0"}`}>
           <Image
-            src="/notfound.png" // Replace with your not-found illustration
+            src="/notfoundpage.png" 
             alt="Page not found"
             fill
             className="object-contain"

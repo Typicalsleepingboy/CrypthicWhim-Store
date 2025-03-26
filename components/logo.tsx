@@ -29,7 +29,7 @@ export default function Logo({ size = "md", withText = true, className = "" }: L
           className="object-cover"
         />
       </div>
-      {withText && <span className="ml-2 font-bold text-lg">CrypthicWhim Store  </span>}
+      {withText && <span className="ml-2 font-bold text-lg">CrypthicWhim</span>}
     </Link>
   )
 }

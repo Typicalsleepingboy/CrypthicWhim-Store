@@ -85,7 +85,7 @@ export default function Home() {
     },
     {
       id: 2,
-      name: "YouTube Membership",
+      name: "YouTube Membership JKT48",
       info: "Order Now",
       image: "/placeholder.svg?height=200&width=200",
       description: "Access exclusive content with YouTube channel membership",
@@ -99,7 +99,7 @@ export default function Home() {
     },
     {
       id: 4,
-      name: "JKT48 Theater Show Ticket",
+      name: "JKT48 Theater Show",
       info: "Order Now",
       image: "/placeholder.svg?height=200&width=200",
       description: "Ticket for upcoming JKT48 theater performance",

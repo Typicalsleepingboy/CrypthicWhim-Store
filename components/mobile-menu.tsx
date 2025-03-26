@@ -20,7 +20,6 @@ export default function MobileMenu({ links }: MobileMenuProps) {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
-    // Prevent scrolling when menu is open
     if (!isOpen) {
       document.body.style.overflow = "hidden"
     } else {
@@ -33,7 +32,6 @@ export default function MobileMenu({ links }: MobileMenuProps) {
     document.body.style.overflow = "auto"
   }
 
-  // Close menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -55,7 +53,6 @@ export default function MobileMenu({ links }: MobileMenuProps) {
         <Menu className="h-6 w-6" />
       </Button>
 
-      {/* Mobile menu overlay */}
       {isOpen && (
         <div ref={menuRef} className="fixed top-0 left-0 right-0 z-50 bg-background shadow-md animate-fade-in">
           <div className="flex items-center justify-between p-4">
