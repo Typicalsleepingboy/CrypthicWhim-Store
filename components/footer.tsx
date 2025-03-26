@@ -10,9 +10,17 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between mb-8">
             <div className="mb-6 md:mb-0">
-              <div className="flex items-center mb-4">
-                <Logo size="sm" withText={true} className="text-white" />
-              </div>
+            <div className="flex items-center mb-4">
+            <Logo size="sm" withText={true} className="text-white" />
+          </div>
+          <div className="max-w-6xl mx-auto px-4 mb-8 text-left">
+            <h2 className="text-xs md:text-md mb-1">
+              Find Private Message JKT48, YouTube memberships
+            </h2>
+            <h2 className="text-xs md:text-md">
+              Discord Nitro and other digital products here
+            </h2>
+          </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
