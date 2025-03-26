@@ -25,8 +25,10 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   const redirectToWhatsApp = () => {
-    window.open(product.whatsappLink || "https://wa.me/6281216852227", "_blank")
-  }
+    const message = `Saya ingin beli product: ${product?.name}`
+    const encodedMessage = encodeURIComponent(message)
+    window.open(`https://wa.me/6281216852227?text=${encodedMessage}`, "_blank")
+}
 
   return (
     <Dialog>

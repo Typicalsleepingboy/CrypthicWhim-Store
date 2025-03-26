@@ -43,8 +43,6 @@ const Counter = ({ target, duration = 2000 }: { target: number; duration?: numbe
   return <span>{count}+</span>
 }
 
-
-
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [theaterEvents, setTheaterEvents] = useState<TheaterEvent[]>([])
@@ -71,7 +69,7 @@ export default function Home() {
     fetchTheaterEvents()
   }, [])
 
-const navLinks = [
+  const navLinks = [
     { href: "/", label: "Home" },
     { href: "/schedule", label: "Schedule" },
     { href: "/about", label: "About" },
@@ -173,31 +171,26 @@ const navLinks = [
       </nav>
 
       <section
-        className={`bg-primary text-white p-8 md:p-12 rounded-xl mx-4 md:mx-auto max-w-6xl my-6 relative overflow-hidden ${isLoaded ? "animate-fade-in" : "opacity-0"}`}
+        className={`bg-background text-foreground p-8 md:p-12 rounded-xl mx-4 md:mx-auto max-w-6xl my-6 relative overflow-hidden border ${isLoaded ? "animate-fade-in" : "opacity-0"}`}
       >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2)_0%,transparent_40%)]"></div>
-          <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.2)_0%,transparent_40%)]"></div>
-        </div>
-
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6 z-10">
-            <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-medium backdrop-blur-sm">
+            <div className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium backdrop-blur-sm">
               Trusted by hundreds of customers
             </div>
             <h1 className={`text-4xl md:text-5xl font-bold ${isLoaded ? "animate-slide-in-left" : "opacity-0"}`}>
               CrypthicWhim Store
             </h1>
             <p
-              className={`text-primary-foreground/90 text-lg ${isLoaded ? "animate-slide-in-left animate-delay-100" : "opacity-0"}`}
+              className={`text-muted-foreground text-lg ${isLoaded ? "animate-slide-in-left animate-delay-100" : "opacity-0"}`}
             >
-              Third-party platform for digital products including PM JKT48, YouTube Membership, Discord Nitro and more
+            Find Private Message JKT48, YouTube memberships, Discord Nitro and other digital products here
             </p>
             <div
               className={`flex space-x-4 pt-4 ${isLoaded ? "animate-slide-in-left animate-delay-200" : "opacity-0"}`}
             >
               <a href="https://discord.gg/Ge6n8KQMVr" target="_blank" rel="noopener noreferrer">
-                <Button className="bg-white text-lg text-primary hover:bg-white/90">
+                <Button className="bg-primary text-lg text-primary-foreground hover:bg-primary/90">
                   Shop Now
                 </Button>
               </a>
@@ -211,9 +204,9 @@ const navLinks = [
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center text-center transform transition-transform hover:scale-105"
+              className="bg-muted/50 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center text-center transform transition-transform hover:scale-105"
             >
-              <div className="bg-white/20 p-2 rounded-full mb-2">{stat.icon}</div>
+              <div className="bg-primary/10 p-2 rounded-full mb-2">{stat.icon}</div>
               <h3 className="text-xl md:text-2xl font-bold">
                 {stat.isCounter ? (
                   <Counter target={parseInt(stat.title)} duration={2000} />
@@ -221,33 +214,38 @@ const navLinks = [
                   stat.title + (stat.title === "100" ? "%" : "")
                 )}
               </h3>
-              <p className="text-sm text-white/80">{stat.description}</p>
+              <p className="text-sm text-muted-foreground">{stat.description}</p>
             </div>
           ))}
         </div>
-
-        <div className="absolute top-4 right-1/4 w-12 h-12 rounded-full border-2 border-white/20 opacity-50"></div>
-        <div className="absolute bottom-8 left-1/3 w-8 h-8 text-white/30">+</div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 rounded-full border border-white/10 opacity-30"></div>
-        <div className="absolute bottom-12 right-1/3 w-4 h-4 text-white/40">*</div>
       </section>
 
+      <div 
+        className={`max-w-6xl mx-auto px-4 mb-8 text-center ${isLoaded ? "animate-fade-in animate-delay-400" : "opacity-0"}`}
+      >
+        <h2 className="text-2xl md:text-3xl font-bold mb-3">Jadwal Show Theater Terbaru</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Jadwal show theater terbaru dan terjangkau pesan sekarang di CrypthicWhim Store!
+        </p>
+      </div>
+
       {!isLoading && theaterEvents.length > 0 && (
-        <div className="mx-4 md:mx-auto max-w-6xl my-6">
+        <div 
+          className={`mx-4 md:mx-auto max-w-6xl my-6 ${isLoaded ? "animate-fade-in animate-delay-500" : "opacity-0"}`}
+        >
           <TheaterSlideshow events={theaterEvents} />
         </div>
       )}
 
-      
       <section
-        className={`px-4 py-8 max-w-6xl mx-auto ${isLoaded ? "animate-slide-up animate-delay-300" : "opacity-0"}`}
+        className={`px-4 py-8 max-w-6xl mx-auto ${isLoaded ? "animate-fade-in animate-delay-600" : "opacity-0"}`}
       >
         <h2 className="text-2xl font-bold mb-6">CrypthicWhim Product</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {trendingProducts.map((product, index) => (
             <div
               key={product.id}
-              className={isLoaded ? `animate-slide-up animate-delay-${(index + 3) * 100}` : "opacity-0"}
+              className={isLoaded ? `animate-slide-up animate-delay-${(index + 7) * 100}` : "opacity-0"}
             >
               <ProductCard product={product} />
             </div>
@@ -255,10 +253,9 @@ const navLinks = [
         </div>
       </section>
 
-      <div className={isLoaded ? "animate-fade-in animate-delay-500" : "opacity-0"}>
+      <div className={isLoaded ? "animate-fade-in animate-delay-800" : "opacity-0"}>
         <Footer />
       </div>
     </main>
   )
 }
-

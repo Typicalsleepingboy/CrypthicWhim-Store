@@ -209,7 +209,6 @@ export default function EventDetailPage() {
                 </div>
             </nav>
 
-            {/* Back button with enhanced styling */}
             <div className="max-w-6xl mx-auto px-4 py-4">
                 <Button
                     variant="ghost"
@@ -223,7 +222,6 @@ export default function EventDetailPage() {
                 </Button>
             </div>
 
-            {/* Event Header - Narrower Banner */}
             <div className="max-w-6xl mx-auto px-4">
                 <div className="relative w-full h-[200px] md:h-[300px] rounded-xl overflow-hidden">
                     <Image
