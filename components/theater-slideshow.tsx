@@ -73,7 +73,7 @@ export default function TheaterSlideshow({ events }: { events: TheaterEvent[] })
             <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10 z-10">
                 <div className="flex items-center space-x-2 mb-3">
                     <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse">
-                        Theater Available Now
+                        Show Available
                     </span>
                     <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm flex items-center">
                         <Calendar className="w-4 h-4 mr-1" />
@@ -94,7 +94,6 @@ export default function TheaterSlideshow({ events }: { events: TheaterEvent[] })
                 </div>
             </div>
 
-            {/* Navigation arrows */}
             <button
                 onClick={goToPrevSlide}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full z-20"
@@ -110,13 +109,12 @@ export default function TheaterSlideshow({ events }: { events: TheaterEvent[] })
                 <ChevronRight className="h-6 w-6" />
             </button>
 
-            {/* Dots indicator */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
                 {events.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => goToSlide(index)}
-                        className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+                        className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-primary" : "bg-white/50"}`}
                         aria-label={`Go to slide ${index + 1}`}
                     />
                 ))}
