@@ -195,7 +195,6 @@ export default function EventDetailPage() {
                 </div>
             </nav>
 
-           {/* Back button with enhanced styling */}
             <div className="max-w-6xl mx-auto px-4 py-4">
             <Button 
                 variant="ghost" 
@@ -209,7 +208,7 @@ export default function EventDetailPage() {
             </Button>
             </div>
 
-            {/* Event Header - Narrower Banner */}
+
             <div className="max-w-6xl mx-auto px-4">
                 <div className="relative w-full h-[200px] md:h-[300px] rounded-xl overflow-hidden">
                     <Image 
@@ -260,14 +259,32 @@ export default function EventDetailPage() {
                             </div>
 
                             <div className="flex items-center space-x-4 mt-8">
-                                <Button variant="outline" className="flex items-center">
-                                    <Share2 className="w-4 h-4 mr-2" />
-                                    Share
-                                </Button>
-                                <Button variant="outline" className="flex items-center">
-                                    <Heart className="w-4 h-4 mr-2" />
-                                    Save
-                                </Button>
+                            <Button 
+                                variant="outline" 
+                                className="flex items-center"
+                                onClick={() => {
+                                navigator.clipboard.writeText(window.location.href)
+                                    .then(() => {
+                                    // Show success feedback
+                                    const button = document.getElementById('share-button');
+                                    if (button) {
+                                        button.innerHTML = '<Check className="w-4 h-4 mr-2" /> Copied!';
+                                        setTimeout(() => {
+                                        button.innerHTML = '<Share2 className="w-4 h-4 mr-2" /> Share';
+                                        }, 2000);
+                                    }
+                                    })
+                                    .catch(err => {
+                                    console.error('Failed to copy link: ', err);
+                                    // Fallback for browsers that don't support clipboard API
+                                    prompt('Copy this link:', window.location.href);
+                                    });
+                                }}
+                                id="share-button"
+                            >
+                                <Share2 className="w-4 h-4 mr-2" />
+                                Share
+                            </Button>
                             </div>
                         </div>
                     </div>
