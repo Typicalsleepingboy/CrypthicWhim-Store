@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 import { ThemeToggle } from "@/components/theme-toggle"
 import Logo from "@/components/logo"
 import MobileMenu from "@/components/mobile-menu"
-import { Clock, Users, ShieldCheck, Award, CrownIcon } from "lucide-react"
+import { Clock, Users, ShieldCheck, Award, CrownIcon, ShoppingBasket } from "lucide-react"
 import TheaterSlideshow from "@/components/theater-slideshow"
 
 interface TheaterEvent {
@@ -296,7 +296,10 @@ export default function Home() {
       <section
         className={`px-4 py-8 max-w-6xl mx-auto ${isLoaded ? "animate-fade-in animate-delay-600" : "opacity-0"}`}
       >
-        <h2 className="text-2xl font-bold mb-6">CrypthicWhim Product</h2>
+         <h2 className="text-2xl font-bold flex items-center">
+              <ShoppingBasket className="w-5 h-5 mr-2 text-yellow-500" />
+              CrypthicWhim Product
+            </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {trendingProducts.map((product, index) => (
             <div
