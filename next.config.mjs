@@ -14,7 +14,19 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'production.jkt48pm.my.id',
+        pathname: '/static/profileImages/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.idntimes.com',
+        pathname: '/content-images/**',
+      },
+    ],
+    domains: ['production.jkt48pm.my.id', 'cdn.idntimes.com'], // Alternative approach
   },
   experimental: {
     webpackBuildWorker: true,

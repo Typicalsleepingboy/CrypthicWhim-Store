@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 import { ThemeToggle } from "@/components/theme-toggle"
 import Logo from "@/components/logo"
 import MobileMenu from "@/components/mobile-menu"
-import { Clock, Users, ShieldCheck, Award } from "lucide-react"
+import { Clock, Users, ShieldCheck, Award, CrownIcon } from "lucide-react"
 import TheaterSlideshow from "@/components/theater-slideshow"
 
 interface TheaterEvent {
@@ -21,6 +21,14 @@ interface TheaterEvent {
     description: string
     liveroom_price: number
   }
+}
+
+interface TopIdol {
+  user_id: string
+  idol_id: string
+  nickname: string
+  profile_image: string
+  subscription_count: number
 }
 
 const Counter = ({ target, duration = 2000 }: { target: number; duration?: number }) => {
@@ -46,27 +54,34 @@ const Counter = ({ target, duration = 2000 }: { target: number; duration?: numbe
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [theaterEvents, setTheaterEvents] = useState<TheaterEvent[]>([])
+  const [topIdols, setTopIdols] = useState<TopIdol[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsLoaded(true)
 
-    const fetchTheaterEvents = async () => {
+
+    const fetchData = async () => {
       try {
-        const response = await fetch("/api/jkt48")
-        if (!response.ok) {
-          throw new Error("Failed to fetch theater events")
-        }
-        const data = await response.json()
-        setTheaterEvents(data.livestreams || [])
+        // Fetch theater events
+        const eventsResponse = await fetch("/api/jkt48")
+        if (!eventsResponse.ok) throw new Error("Failed to fetch theater events")
+        const eventsData = await eventsResponse.json()
+        setTheaterEvents(eventsData.livestreams || [])
+
+        // Fetch top idols
+        const idolsResponse = await fetch("https://production.jkt48pm.my.id/api/top-idol")
+        if (!idolsResponse.ok) throw new Error("Failed to fetch top idols")
+        const idolsData = await idolsResponse.json()
+        setTopIdols(idolsData.data || [])
       } catch (error) {
-        console.error("Error fetching theater events:", error)
+        console.error("Error fetching data:", error)
       } finally {
         setIsLoading(false)
       }
     }
 
-    fetchTheaterEvents()
+    fetchData()
   }, [])
 
   const navLinks = [
@@ -184,7 +199,7 @@ export default function Home() {
             <p
               className={`text-muted-foreground text-lg ${isLoaded ? "animate-slide-in-left animate-delay-100" : "opacity-0"}`}
             >
-            Find Private Message JKT48, YouTube memberships, Discord Nitro and other digital products here
+              Find Private Message JKT48, YouTube memberships, Discord Nitro and other digital products here
             </p>
             <div
               className={`flex space-x-4 pt-4 ${isLoaded ? "animate-slide-in-left animate-delay-200" : "opacity-0"}`}
@@ -220,7 +235,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div 
+      <div
         className={`max-w-6xl mx-auto px-4 mb-8 text-center ${isLoaded ? "animate-fade-in animate-delay-400" : "opacity-0"}`}
       >
         <h2 className="text-2xl md:text-3xl font-bold mb-3">Jadwal Show Theater Terbaru</h2>
@@ -230,11 +245,52 @@ export default function Home() {
       </div>
 
       {!isLoading && theaterEvents.length > 0 && (
-        <div 
+        <div
           className={`mx-4 md:mx-auto max-w-6xl my-6 ${isLoaded ? "animate-fade-in animate-delay-500" : "opacity-0"}`}
         >
           <TheaterSlideshow events={theaterEvents} />
         </div>
+      )}
+
+      {topIdols.length > 0 && (
+        <section className={`max-w-6xl mx-auto px-4 py-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold flex items-center">
+              <CrownIcon className="w-5 h-5 mr-2 text-yellow-500" />
+              Top Private Messages of the Week
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            {topIdols.map((idol, index) => {
+              const imageUrl = idol.profile_image
+                ? `https://production.jkt48pm.my.id${idol.profile_image}`
+                : '/placeholder-profile.jpg';
+
+              return (
+                <div key={idol.idol_id} className="group">
+                  <div className="relative aspect-square overflow-hidden rounded-lg mb-2">
+                    <Image
+                      src={imageUrl}
+                      alt={idol.nickname}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                    />
+                    {index < 3 && (
+                      <div className={`absolute top-2 left-2 text-white text-xs font-bold px-2 py-1 rounded-full ${index === 0 ? 'bg-yellow-500' :
+                          index === 1 ? 'bg-gray-400' :
+                            'bg-amber-700'
+                        }`}>
+                        #{index + 1}
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="w-full mt-2 bg-primary hover:bg-primary/90 rounded-lg font-medium text-center">{idol.nickname}</h3>
+                </div>
+              )
+            })}
+          </div>
+        </section>
       )}
 
       <section
