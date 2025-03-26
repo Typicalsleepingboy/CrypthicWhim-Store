@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 import { ThemeToggle } from "@/components/theme-toggle"
 import Logo from "@/components/logo"
 import MobileMenu from "@/components/mobile-menu"
-import { Clock, Users, ShieldCheck, Award, CrownIcon, ShoppingBasket } from "lucide-react"
+import { Clock, Users, ShieldCheck, Award, CrownIcon } from "lucide-react"
 import TheaterSlideshow from "@/components/theater-slideshow"
 
 interface TheaterEvent {
@@ -256,7 +256,6 @@ export default function Home() {
         <section className={`max-w-6xl mx-auto px-4 py-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold flex items-center">
-              <CrownIcon className="w-5 h-5 mr-2 text-yellow-500" />
               Top Private Messages of the Week
             </h2>
           </div>
@@ -297,8 +296,7 @@ export default function Home() {
         className={`px-4 py-8 max-w-6xl mx-auto ${isLoaded ? "animate-fade-in animate-delay-600" : "opacity-0"}`}
       >
         <h2 className="text-2xl font-bold mb-6">
-        <ShoppingBasket className="w-5 h-5 mr-2 text-yellow-500" />
-        CrypthicWhim Product</h2>
+          CrypthicWhim Product</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {trendingProducts.map((product, index) => (
             <div
