@@ -285,7 +285,7 @@ export default function Home() {
                       </div>
                     )}
                   </div>
-                  <h3 className="w-full mt-2 bg-primary hover:bg-primary/90 rounded-lg font-medium text-center">{idol.nickname}</h3>
+                  <h3 className="w-full mt-2 bg-white dark:bg-gray-800 rounded-lg font-medium text-center">{idol.nickname}</h3>
                 </div>
               )
             })}
