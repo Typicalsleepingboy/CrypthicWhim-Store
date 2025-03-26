@@ -16,6 +16,7 @@ export default function About() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/schedule", label: "Schedule" },
     { href: "/about", label: "About" },
   ]
 
