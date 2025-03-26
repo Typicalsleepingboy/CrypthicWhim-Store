@@ -76,22 +76,31 @@ export default function EventDetailPage() {
 
     const formatDate = (timestamp: number) => {
         const date = new Date(timestamp * 1000)
-        return date.toLocaleDateString("en-US", {
-            weekday: "long",
+        return date.toLocaleDateString("id-ID", {
+            weekday: "short",
             day: "numeric",
-            month: "long",
-            year: "numeric",
+            month: "short",
         })
     }
 
     const formatTime = (timestamp: number) => {
         const date = new Date(timestamp * 1000)
-        return date.toLocaleTimeString("en-US", {
+        return date.toLocaleTimeString("id-ID", {
             hour: "2-digit",
             minute: "2-digit",
-            hour12: true,
+            hour12: false,
+            timeZone: 'Asia/Jakarta'
         })
     }
+
+    const getShowTimeFromDescription = (description: string) => {
+        const timeMatch = description.match(/Show start: (\d{1,2}\.\d{2}) WIB/);
+        if (timeMatch && timeMatch[1]) {
+            return timeMatch[1].replace('.', ':');
+        }
+        return null;
+    };
+
 
     const redirectToDiscord = () => {
         window.open("https://discord.com", "_blank")
@@ -146,7 +155,7 @@ export default function EventDetailPage() {
                 <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
                     <div className="relative w-64 h-64 mb-8">
                         <Image
-                            src="/notfound.png" 
+                            src="/notfound.png"
                             alt="Theater not found"
                             fill
                             className="object-contain"
@@ -243,7 +252,8 @@ export default function EventDetailPage() {
                             </div>
                             <div className="flex items-center text-sm">
                                 <Clock className="w-4 h-4 mr-1" />
-                                {formatTime(event.scheduled_at)}
+                                {getShowTimeFromDescription(event.idnliveplus.description) ||
+                                    formatTime(event.scheduled_at)} WIB
                             </div>
                         </div>
                     </div>
@@ -302,12 +312,19 @@ export default function EventDetailPage() {
                             </div>
                             <div className="flex justify-between items-center mb-4">
                                 <span className="text-gray-600 dark:text-gray-300">Time</span>
-                                <span>{formatTime(event.scheduled_at)}</span>
+                                <span className="w-4 h-4 mr-1" />
+                                {getShowTimeFromDescription(event.idnliveplus.description) ||
+                                    formatTime(event.scheduled_at)} WIB
                             </div>
                             <div className="flex justify-between items-center mb-6">
                                 <span className="text-gray-600 dark:text-gray-300">Status</span>
-                                <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full text-sm">
-                                    Available
+                                <span className={`px-2 py-1 rounded-full text-sm ${new Date(event.scheduled_at * 1000) < new Date()
+                                    ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100"
+                                    : "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100"
+                                    }`}>
+                                    {new Date(event.scheduled_at * 1000) < new Date()
+                                        ? "Ongoing"
+                                        : "Available"}
                                 </span>
                             </div>
 

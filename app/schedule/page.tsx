@@ -66,7 +66,7 @@ export default function SchedulePage() {
 
     const formatDate = (timestamp: number) => {
         const date = new Date(timestamp * 1000)
-        return date.toLocaleDateString("en-US", {
+        return date.toLocaleDateString("id-ID", {
             weekday: "short",
             day: "numeric",
             month: "short",
@@ -75,12 +75,21 @@ export default function SchedulePage() {
 
     const formatTime = (timestamp: number) => {
         const date = new Date(timestamp * 1000)
-        return date.toLocaleTimeString("en-US", {
+        return date.toLocaleTimeString("id-ID", {
             hour: "2-digit",
             minute: "2-digit",
-            hour12: true,
+            hour12: false,
+            timeZone: 'Asia/Jakarta'
         })
     }
+
+    const getShowTimeFromDescription = (description: string) => {
+        const timeMatch = description.match(/Show start: (\d{1,2}\.\d{2}) WIB/);
+        if (timeMatch && timeMatch[1]) {
+            return timeMatch[1].replace('.', ':');
+        }
+        return null;
+    };
 
     return (
         <main className="min-h-screen">
@@ -137,7 +146,7 @@ export default function SchedulePage() {
                     <div className="flex flex-col items-center justify-center py-20 text-center">
                         <div className="relative w-64 h-64 mb-8">
                             <Image
-                                src="/noevent.png" 
+                                src="/noevent.png"
                                 alt="No upcoming theaters"
                                 fill
                                 className="object-contain"
@@ -172,18 +181,23 @@ export default function SchedulePage() {
                                 </div>
                                 <div className="p-5 flex-1 flex flex-col">
                                     <h2 className="text-xl font-bold mb-2 line-clamp-2">{theater.title}</h2>
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                    <div className="flex flex-wrap gap-4 text-white/90">
+                                        <div className="flex items-center text-sm">
                                             <Calendar className="w-4 h-4 mr-1" />
                                             {formatDate(theater.scheduled_at)}
                                         </div>
-                                        <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                                        <div className="flex items-center text-sm">
                                             <Clock className="w-4 h-4 mr-1" />
-                                            {formatTime(theater.scheduled_at)}
+                                            {getShowTimeFromDescription(theater.idnliveplus.description) ||
+                                                formatTime(theater.scheduled_at)} WIB
                                         </div>
                                     </div>
                                     <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-sm flex-1">
-                                        {theater.idnliveplus.description.split("\n\n")[0]}
+                                        {theater.idnliveplus.description
+                                            .split('\n\n')
+                                            .filter(paragraph => !paragraph.startsWith('Show start:'))
+                                            .join('\n\n')
+                                            .substring(0, 150)} {/* Limit to 150 chars to prevent overflow */}
                                     </p>
                                     <div className="flex space-x-3 mt-auto">
                                         <Button asChild className="bg-primary hover:bg-primary/90 flex-1">
