@@ -96,30 +96,38 @@ export default function Home() {
       name: "Private Message JKT48",
       info: "Order Now",
       image: "/jkt48pm.png",
-      description: "Get a personal message from your favorite JKT48 member",
+      description: "Dapatkan pesan pribadi langsung dari member JKT48 favoritmu!",
     },
     {
       id: 2,
       name: "YouTube Membership JKT48",
       info: "Order Now",
       image: "/jkt48membership.png",
-      description: "Access exclusive content with YouTube channel membership",
+      description: "Akses konten eksklusif dan spesial hanya untuk member channel YouTube JKT48.",
     },
     {
       id: 3,
       name: "Discord Nitro",
       info: "Order Now",
       image: "/crnitro.png",
-      description: "Enhance your Discord experience with Nitro subscription",
+      description: "Upgrade Tampilan Discord kamu dengan fitur premium dari Nitro.",
     },
     {
       id: 4,
       name: "JKT48 Theater Show",
       info: "Order Now",
       image: "/jkt48theater.png",
-      description: "Ticket for upcoming JKT48 theater performance",
+      description: "Tiket Show streaming untuk menyaksikan pertunjukan Melalui live streaming",
     },
-  ]
+    {
+      id: 5,
+      name: "APK Premium",
+      info: "Order Now",
+      image: "/PREM.png",
+      description: "Akses aplikasi premium dengan fitur lengkap tanpa batasan.",
+    },
+  ];
+  
 
   const stats = [
     {
@@ -235,8 +243,10 @@ export default function Home() {
         </div>
       </section>
 
-      <div
-        className={`max-w-6xl mx-auto px-4 mb-8 text-center ${isLoaded ? "animate-fade-in animate-delay-400" : "opacity-0"}`}
+            <div
+        className={`max-w-6xl mx-auto px-4 mb-8 text-center ${
+          isLoaded ? "animate-fade-in animate-delay-400" : "opacity-0"
+        }`}
       >
         <h2 className="text-2xl md:text-3xl font-bold mb-3">Jadwal Show Theater Terbaru</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -244,13 +254,33 @@ export default function Home() {
         </p>
       </div>
 
-      {!isLoading && theaterEvents.length > 0 && (
+      {!isLoading && theaterEvents.length > 0 ? (
         <div
-          className={`mx-4 md:mx-auto max-w-6xl my-6 ${isLoaded ? "animate-fade-in animate-delay-500" : "opacity-0"}`}
+          className={`mx-4 md:mx-auto max-w-6xl my-6 ${
+            isLoaded ? "animate-fade-in animate-delay-500" : "opacity-0"
+          }`}
         >
           <TheaterSlideshow events={theaterEvents} />
         </div>
+      ) : (
+        !isLoading && (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="relative w-64 h-64 mb-8">
+              <Image
+                src="/noevent.png"
+                alt="No upcoming theaters"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <h2 className="text-2xl font-bold mb-2">No Upcoming Theaters</h2>
+            <p className="text-gray-500 dark:text-gray-400 max-w-md">
+              There are currently no scheduled shows. Please check back later for updates.
+            </p>
+          </div>
+        )
       )}
+
 
       {topIdols.length > 0 && (
         <section className={`max-w-6xl mx-auto px-4 py-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
@@ -297,7 +327,7 @@ export default function Home() {
       >
         <h2 className="text-2xl font-bold mb-6">
           CrypthicWhim Product</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
           {trendingProducts.map((product, index) => (
             <div
               key={product.id}

@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server"
 
-export const dynamic = 'force-static'
-export const revalidate = 3600 
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
     try {
         const apiUrl = `${process.env.NEXT_PUBLIC_IDN_API_BASE_URL}/${process.env.NEXT_PUBLIC_IDN_API_PATH}?username=${process.env.NEXT_PUBLIC_IDN_API_USERNAME}`
         
         const response = await fetch(apiUrl, {
-            next: { revalidate: 3600 },
+            cache: 'no-store', 
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -28,9 +27,9 @@ export async function GET() {
 
         return NextResponse.json(responseData, {
             headers: {
-                'Cache-Control': 'public, max-age=3600, stale-while-revalidate=3600',
-                'CDN-Cache-Control': 'public, max-age=3600',
-                'Vercel-CDN-Cache-Control': 'public, max-age=3600'
+                'Cache-Control': 'no-store',
+                'CDN-Cache-Control': 'no-store',
+                'Vercel-CDN-Cache-Control': 'no-store'
             }
         })
     } catch (error) {
